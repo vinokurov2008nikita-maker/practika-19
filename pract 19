@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        
+       // Задание 1
+        Queue<string> queue = new Queue<string>();
+        queue.Enqueue("Vитек");
+        queue.Enqueue("Максон");
+        queue.Enqueue("Сирега пират");
+        queue.Enqueue("Некит");
+        queue.Enqueue("Головач");
+
+        Console.WriteLine("Очередь: " + string.Join(", ", queue));
+
+        while (queue.Count > 0)
+        {
+            Console.WriteLine("Обслуживаем: " + queue.Dequeue());
+        }
+        Console.WriteLine("Очередь пуста!\n");
+
+        // Задание 2
+        Console.WriteLine("Введите 3 строки:");
+        Stack<string> stack = new Stack<string>();
+        stack.Push("Привет");
+        stack.Push("как");
+        stack.Push("дела");
+
+        Console.WriteLine("\nОбратный порядок:");
+        while (stack.Count > 0)
+        {
+            Console.WriteLine(stack.Pop());
+        }
+        Console.WriteLine();
+
+        // Задание 3
+        HashSet<string> names = new HashSet<string>();
+        names.Add("Витек");
+        names.Add("Максон");
+        names.Add("Серега пират");
+        names.Add("Некит"); 
+        names.Add("Сигма");   
+
+        Console.WriteLine("Уникальные имена:");
+        foreach (string name in names)
+        {
+            Console.WriteLine(name);
+        }
+        Console.WriteLine();
+
+        // Задание 4
+        LinkedList<string> history = new LinkedList<string>();
+        history.AddLast("свет");
+        history.AddLast("цвета");
+        history.AddLast("фильтры");
+        history.AddLast("стол");
+
+        Console.WriteLine("История: " + string.Join(" → ", history));
+
+        Console.WriteLine("Навигация назад:");
+        LinkedListNode<string> current = history.Last;
+        while (current != null)
+        {
+            Console.WriteLine("← " + current.Value);
+            current = current.Previous;
+        }
+        Console.WriteLine();
+
+       // задание 5
+        Dictionary<string, string> cache = new Dictionary<string, string>();
+        Queue<string> order = new Queue<string>();
+        int max = 3;
+
+        
+        void Add(string key, string value)
+        {
+            if (cache.Count >= max)
+            {
+                string old = order.Dequeue();
+                cache.Remove(old);
+            }
+            cache[key] = value;
+            order.Enqueue(key);
+            Console.WriteLine($"Добавлено: {key}");
+        }
+
+        
+        Add("фонды", "Зовчик");
+        Add("фонды", "стол");
+        Add("фонды", "книга");
+        Add("фондов", "стол"); 
+        Add("фондов", "стул"); 
+
+        Console.WriteLine("\nИтоговый кэш:");
+        foreach (var item in cache)
+        {
+            Console.WriteLine($"{item.Key}: {item.Value}");
+        }
+
+        Console.WriteLine("\nВсе задания выполнены!");
+    }
+}
